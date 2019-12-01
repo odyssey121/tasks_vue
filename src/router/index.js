@@ -7,18 +7,18 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/tasks',
     name: 'Tasks',
     component: Tasks
   },
   {
-    path: '/Create',
+    path: '/create',
     name: 'Create',
     component: Create
   },
 
   {
-    path: '/Task/:id',
+    path: '/task/:id',
     name: 'Taks',
     component: Task
   },

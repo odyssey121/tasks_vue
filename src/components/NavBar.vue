@@ -5,10 +5,10 @@
         <i class="large material-icons">access_alarms</i>
       </a>
       <ul class="left hide-on-med-and-down">
-        <router-link tag="li" to="/Create" active-class="active" exact>
+        <router-link tag="li" to="/create" active-class="active" exact>
           <a href="#">Create</a>
         </router-link>
-        <router-link tag="li" to="/" active-class="active" exact>
+        <router-link tag="li" to="/tasks" active-class="active" exact>
           <a href="#">Tasks</a>
         </router-link>
         <!-- <router-link tag="li" to="/Task/:id" active-class="active" exact>

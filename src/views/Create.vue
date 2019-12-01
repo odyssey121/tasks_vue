@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <h1 class="col s6 offset-s3">Create task</h1>
-    <form class="col s12">
+    <form class="col s12" @submit.prevent="submitHandler">
       <div class="input-field">
         <input id="title" type="text" class="validate" v-model="title" />
         <label for="title">Title</label>
@@ -25,6 +25,12 @@
       <div class="input-field">
         <input type="text" ref="picker" />
       </div>
+      <div class="input-field">
+        <button class="btn waves-effect waves-light" type="submit" name="action">
+          Create task
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -38,15 +44,39 @@ export default {
   data() {
     return {
       description: "",
-      title: ""
+      title: "",
+      chips: null,
+      picker: null
     };
   },
+  methods: {
+    submitHandler() {
+      const task = {
+        title: this.title,
+        description: this.description,
+        id: Date.now(),
+        status: "active",
+        date: this.picker.date,
+        tags: this.chips.chipsData
+      };
+      this.$store.dispatch('createTask',task)
+      this.$router.push('/tasks')
+    }
+  },
+  destroyed() {
+    if(this.chips && this.chips.destroy){
+      this.chips.destroy()
+    }
+    if(this.picker && this.picker.destroy){
+      this.picker.destroy()
+    }
+  },
   mounted() {
-    M.Chips.init(this.$refs.chips, { placeholder: "Tags" });
-    M.Datepicker.init(this.$refs.picker, {
+    this.chips = M.Chips.init(this.$refs.chips, { placeholder: "Tags" });
+    this.picker = M.Datepicker.init(this.$refs.picker, {
       format: "dd.mm.yyyy",
       defaultDate: new Date(),
-      setDefaultDate: true,
+      setDefaultDate: true
     });
   },
   components: {}
